@@ -1,6 +1,7 @@
 NAME = so_long
 CC = gcc
 CFLAGS = #-Wall -Wextra -Werror
+MAKE = make
 
 SRC = main.c
 OBJ = $(SRC:.c=.o)
@@ -13,7 +14,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 MLX = $(MLX_DIR)/libmlx.a
 
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lXpm -lm -lz
+MLX_FLAGS = -L ${MLX_DIR} -lmlx -I${MLX_DIR} -lXext -lX11
 
 all: $(NAME)
 

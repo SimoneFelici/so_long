@@ -34,7 +34,6 @@ int	main()
 
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img, 0, 0);
 
-	sleep(5);
 //	mlx_hook(vars.win, 2, 1L<<0, key_press, &vars);
-//	mlx_loop(vars.mlx);
+	mlx_loop(vars.mlx);
 }
