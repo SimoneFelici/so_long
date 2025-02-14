@@ -1,24 +1,24 @@
 NAME = so_long
-
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -
+CFLAGS = #-Wall -Wextra -Werror
 
-SRC = main.c #game.c utils.c
-
+SRC = main.c
 OBJ = $(SRC:.c=.o)
 
 LIBFT_DIR = libraries/libft
 FT_PRINTF_DIR = libraries/ft_printf
-MLX_DIR = libraries/minilibx
+MLX_DIR = libraries/minilibx-linux
 
 LIBFT = $(LIBFT_DIR)/libft.a
 FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11
+MLX = $(MLX_DIR)/libmlx.a
+
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lXpm -lm -lz
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) $(FT_PRINTF)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(FT_PRINTF) $(MINILIBX)
+$(NAME): $(OBJ) $(LIBFT) $(FT_PRINTF) $(MLX)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf $(MLX_FLAGS)
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
@@ -26,13 +26,17 @@ $(LIBFT):
 $(FT_PRINTF):
 	$(MAKE) -C $(FT_PRINTF_DIR)
 
+$(MLX):
+	$(MAKE) -C $(MLX_DIR)
+
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -I$(MLX_DIR) -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -c $< -o $@
 
 clean:
 	rm -f $(OBJ)
 	$(MAKE) -C $(LIBFT_DIR) clean
 	$(MAKE) -C $(FT_PRINTF_DIR) clean
+	$(MAKE) -C $(MLX_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
