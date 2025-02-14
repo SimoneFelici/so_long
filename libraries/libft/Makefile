@@ -6,7 +6,13 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
        ft_strnstr.c ft_atoi.c ft_strrchr.c ft_substr.c \
        ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c \
        ft_strmapi.c ft_striteri.c ft_putchar_fd.c \
-       ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
+       ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
+       \
+       ft_printf/ft_printf.c ft_printf/ft_uitoa.c ft_printf/ft_uitoabase.c \
+       ft_printf/ft_ulltoa_base.c ft_printf/ft_handle_char.c ft_printf/ft_handle_digit.c \
+       ft_printf/ft_handle_format.c ft_printf/ft_handle_hex.c ft_printf/ft_handle_ptr.c \
+       ft_printf/ft_handle_str.c ft_printf/ft_handle_unsigned.c \
+       ft_printf/ft_print_char.c ft_printf/ft_print_digit.c ft_printf/ft_print_str.c
 
 SRCSB = ft_lstnew_bonus.c ft_lstadd_front_bonus.c \
 	ft_lstsize_bonus.c ft_lstlast_bonus.c \
@@ -36,7 +42,7 @@ clean:
 	${RM} ${OBJS} ${OBJSB}
 
 fclean: clean
-	${RM} ${NAME} ${bonus} 
+	${RM} ${NAME} ${bonus}
 
 re: fclean all
 

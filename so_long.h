@@ -2,7 +2,6 @@
 # define SO_LONG_H
 
 # include "libraries/minilibx-linux/mlx.h"
-# include "libraries/ft_printf/ft_printf.h"
 # include "libraries/libft/libft.h"
 # include "fcntl.h"
 # include <unistd.h>
