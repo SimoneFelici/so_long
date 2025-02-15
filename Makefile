@@ -10,7 +10,7 @@ MLX_DIR = ./libraries/minilibx-linux/
 
 LIBFT = $(LIBFT_DIR)/libft.a
 
-MLX_FLAGS = -L ${MLX_DIR} -lmlx -I${MLX_DIR} -lXext -lX11
+MLX_FLAGS = -L ${MLX_DIR} -lmlx_Linux -I${MLX_DIR} -lXext -lX11 -lm -lz 
 
 all: $(NAME)
 
