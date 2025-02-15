@@ -9,6 +9,8 @@ int	main(void)
 		MAP_HEIGHT * GRID_SIZE, "So Long");
 	if (draw_texture(&vars) != 0)
 		return (1);
+	if (draw_texture(&vars) != 0)
+		return (1);
 	mlx_hook(vars.win, 2, 1L<<0, key_press, &vars);
 	mlx_loop(vars.mlx);
 	return (0);
