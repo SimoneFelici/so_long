@@ -1,8 +1,8 @@
 NAME = so_long
-CC = gcc
+CC = clang
 CFLAGS = #-Wall -Wextra -Werror
 
-SRC = main.c
+SRC = main.c player_input.c draw_texture.c
 OBJ = $(SRC:.c=.o)
 
 LIBFT_DIR = ./libraries/libft
