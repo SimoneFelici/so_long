@@ -1,7 +1,7 @@
 /* XPM */
-static char * background_xpm[] = {
+static char * collectable_xpm[] = {
 "32 32 1 1",
-" 	c #0000FF",
+" 	c #FFFF00",
 "                                ",
 "                                ",
 "                                ",

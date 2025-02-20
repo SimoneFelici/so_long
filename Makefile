@@ -2,7 +2,7 @@ NAME = so_long
 CC = clang
 CFLAGS = #-Wall -Wextra -Werror
 
-SRC = main.c player_input.c draw_texture.c
+SRC = main.c draw_texture.c read_map.c utils.c validate_map.c
 OBJ = $(SRC:.c=.o)
 
 LIBFT_DIR = ./libraries/libft
@@ -10,7 +10,7 @@ MLX_DIR = ./libraries/minilibx-linux/
 
 LIBFT = $(LIBFT_DIR)/libft.a
 
-MLX_FLAGS = -L ${MLX_DIR} -lmlx_Linux -I${MLX_DIR} -lXext -lX11 -lm -lz 
+MLX_FLAGS = -L ${MLX_DIR} -lmlx_Linux -I${MLX_DIR} -lXext -lX11 -lm -lz
 
 all: $(NAME)
 

@@ -12,7 +12,9 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
        ft_printf/ft_ulltoa_base.c ft_printf/ft_handle_char.c ft_printf/ft_handle_digit.c \
        ft_printf/ft_handle_format.c ft_printf/ft_handle_hex.c ft_printf/ft_handle_ptr.c \
        ft_printf/ft_handle_str.c ft_printf/ft_handle_unsigned.c \
-       ft_printf/ft_print_char.c ft_printf/ft_print_digit.c ft_printf/ft_print_str.c
+       ft_printf/ft_print_char.c ft_printf/ft_print_digit.c ft_printf/ft_print_str.c \
+       \
+       Get_Next_line/get_next_line.c Get_Next_line/get_next_line_utils.c
 
 SRCSB = ft_lstnew_bonus.c ft_lstadd_front_bonus.c \
 	ft_lstsize_bonus.c ft_lstlast_bonus.c \

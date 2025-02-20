@@ -8,11 +8,28 @@
 # include <stdlib.h>
 # include <stdio.h>
 
-# define GRID_SIZE 32
-# define MAP_WIDTH 25
-# define MAP_HEIGHT 19
+# define GRID_SIZE 64
 
-typedef struct	s_player {
+typedef struct s_textures {
+	void	*wall_img;
+	void	*exit_img_closed;
+	void	*exit_img_open;
+	void	*collectible_img;
+	void	*player_img;
+	void	*floor_img;
+}	t_textures;
+
+typedef struct s_map_info {
+	int	rows;
+	int	cols;
+	int	player_count;
+	int	exit_count;
+	int	collectible_count;
+	int	player_x;
+	int	player_y;
+}	t_map_info;
+
+typedef struct s_player {
 	int	x;
 	int	y;
 }	t_player;
@@ -20,13 +37,17 @@ typedef struct	s_player {
 typedef struct s_vars {
 	void		*mlx;
 	void		*win;
-	void		*background_img;
-	void		*player_img;
+	char		**map;
 	t_player	player;
+	t_map_info	map_info;
+	t_textures	textures;
 }	t_vars;
 
-int	ft_printf(const char *format, ...);
-int	key_press(int keycode, t_vars *vars);
-int	draw_texture(t_vars *vars);
+int		ft_printf(const char *format, ...);
+char	**read_map(const char *file_path);
+int		check_map_errors(char **map, t_map_info *info);
+void	draw_map(t_vars *vars);
+int		key_press(int keycode, t_vars *vars);
+void	free_map(char **map);
 
 #endif
