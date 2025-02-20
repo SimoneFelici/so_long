@@ -1,8 +1,5 @@
 #include "so_long.h"
 
-/*
- * Controlla se la mappa è rettangolare (tutte le righe stessa lunghezza).
- */
 static int check_rectangular(char **map, t_map_info *info)
 {
 	int i;
@@ -88,12 +85,17 @@ int check_map_errors(char **map, t_map_info *info)
 	}
 	if (check_walls(map, info))
 	{
-		ft_printf("Error\nMappa non è chiusa dai muri (bordo)\n");
+		ft_printf("Error\nMappa non è chiusa dai muri\n");
 		return (1);
 	}
 	if (check_chars_and_count(map, info))
 	{
-		ft_printf("Error\nCaratteri invalidi o numero errato di P/E/C\n");
+		ft_printf("Error\nCaratteri invalidi o numero errato\n");
+		return (1);
+	}
+	if (check_path(map, info))
+	{
+		ft_printf("Error\nPATH non trovato\n");
 		return (1);
 	}
 	return (0);

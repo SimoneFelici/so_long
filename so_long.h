@@ -29,16 +29,10 @@ typedef struct s_map_info {
 	int	player_y;
 }	t_map_info;
 
-typedef struct s_player {
-	int	x;
-	int	y;
-}	t_player;
-
 typedef struct s_vars {
 	void		*mlx;
 	void		*win;
 	char		**map;
-	t_player	player;
 	t_map_info	map_info;
 	t_textures	textures;
 }	t_vars;
@@ -49,5 +43,6 @@ int		check_map_errors(char **map, t_map_info *info);
 void	draw_map(t_vars *vars);
 int		key_press(int keycode, t_vars *vars);
 void	free_map(char **map);
+int	check_path(char **map, t_map_info *info);
 
 #endif

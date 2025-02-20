@@ -1,17 +1,12 @@
 #include "so_long.h"
 
-/*
- * Legge il file .ber riga per riga con get_next_line
- * e ne costruisce una singola stringa. Poi la splitta su '\n'
- * in modo da ottenere un array di stringhe "map".
- */
-char **read_map(const char *file_path)
+char	**read_map(const char *file_path)
 {
-	int   fd;
-	char  *line;
-	char  **map;
-	char  *tmp_map;
-	char  *tmp_join;
+	int		fd;
+	char	*line;
+	char	**map;
+	char	*tmp_map;
+	char	*tmp_join;
 
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0)
@@ -20,11 +15,6 @@ char **read_map(const char *file_path)
 		return (NULL);
 	}
 	tmp_map = ft_calloc(1, 1);
-	if (!tmp_map)
-	{
-		close(fd);
-		return (NULL);
-	}
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		tmp_join = ft_strjoin(tmp_map, line);

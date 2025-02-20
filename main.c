@@ -39,46 +39,42 @@ int init_textures(t_vars *vars)
 	return (0);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_vars vars;
 
 	if (argc != 2)
 	{
-		ft_printf("Error\nUso: ./so_long map.ber\n");
 		return (1);
 	}
+	
 	vars.map = read_map(argv[1]);
 	if (!vars.map)
 		return (1);
+	printf("Map before error checking (%d rows):\n", 5);
+	for (int i = 0; i < 5; i++)
+	{
+		printf("Row %d: %s\n", i, vars.map[i]);
+	}
+
 	if (check_map_errors(vars.map, &vars.map_info))
 	{
 		free_map(vars.map);
 		return (1);
 	}
-	vars.mlx = mlx_init();
-	if (!vars.mlx)
+
+	printf("Map after error checking (%d rows):\n", vars.map_info.rows);
+	for (int i = 0; i < vars.map_info.rows; i++)
 	{
-		ft_printf("Error\nmlx_init fallita\n");
-		free_map(vars.map);
-		return (1);
+		printf("Row %d: %s\n", i, vars.map[i]);
 	}
+
+	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx,
 		vars.map_info.cols * GRID_SIZE,
 		vars.map_info.rows * GRID_SIZE,
 		"So Long");
-	if (!vars.win)
-	{
-		ft_printf("Error\nmlx_new_window fallita\n");
-		free_map(vars.map);
-		return (1);
-	}
-	if (init_textures(&vars) != 0)
-	{
-		free_map(vars.map);
-		mlx_destroy_window(vars.mlx, vars.win);
-		return (1);
-	}
+	init_textures(&vars);
 	sleep(1);
 	draw_map(&vars);
 	mlx_hook(vars.win, 2, 1L << 0, key_press, &vars);
