@@ -16,6 +16,7 @@ typedef struct s_textures {
 	void	*exit_img_open;
 	void	*collectible_img;
 	void	*player_img;
+	void	*player_img2;
 	void	*floor_img;
 }	t_textures;
 

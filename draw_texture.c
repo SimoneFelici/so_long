@@ -40,10 +40,6 @@ static void draw_tile(t_vars *vars, char c, int x, int y)
 		mlx_put_image_to_window(vars->mlx, vars->win,
 			vars->textures.player_img,
 			x * GRID_SIZE, y * GRID_SIZE);
-		mlx_put_image_to_window(vars->mlx, vars->win,
-			vars->textures.player_img,
-			x * GRID_SIZE, y * GRID_SIZE);
-
 	}
 }
 

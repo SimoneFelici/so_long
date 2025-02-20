@@ -47,7 +47,7 @@ int	main(int argc, char **argv)
 	{
 		return (1);
 	}
-	
+
 	vars.map = read_map(argv[1]);
 	if (!vars.map)
 		return (1);
