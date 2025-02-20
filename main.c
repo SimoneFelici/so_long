@@ -16,17 +16,17 @@ int init_textures(t_vars *vars)
 		return (ft_printf("Error\nImpossibile caricare background.xpm\n"), 1);
 
 	vars->textures.collectible_img = mlx_xpm_file_to_image(vars->mlx,
-		"textures/diamond.xpm", &w, &h);
+		"textures/ender_eye.xpm", &w, &h);
 	if (!vars->textures.collectible_img)
 		return (ft_printf("Error\nImpossibile caricare collectable.xpm\n"), 1);
 
 	vars->textures.exit_img_closed = mlx_xpm_file_to_image(vars->mlx,
-		"textures/portal-closed.xpm", &w, &h);
+		"textures/end_portal_closed.xpm", &w, &h);
 	if (!vars->textures.exit_img_closed)
 		return (ft_printf("Error\nImpossibile caricare exit.xpm\n"), 1);
 
 	vars->textures.exit_img_open = mlx_xpm_file_to_image(vars->mlx,
-		"textures/portal-open.xpm", &w, &h);
+		"textures/end_portal_open.xpm", &w, &h);
 	if (!vars->textures.exit_img_open)
 		return (ft_printf("Error\nImpossibile caricare exit.xpm\n"), 1);
 
