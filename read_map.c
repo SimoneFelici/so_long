@@ -19,10 +19,21 @@ static int	ft_opener(const char *file_path)
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_printf("Error\nImpossibile aprire il file %s\n", file_path);
+		ft_printf("Error\nCan't open file %s\n", file_path);
 		return (NULL);
 	}
 	return (fd);
+}
+
+static char	*validate_tmp_map(char *tmp_map)
+{
+	if (!tmp_map || !*tmp_map)
+	{
+		ft_printf("Error\nFile blank or can't read it\n");
+		free(tmp_map);
+		return (NULL);
+	}
+	return (tmp_map);
 }
 
 char	**read_map(const char *file_path)
@@ -45,12 +56,9 @@ char	**read_map(const char *file_path)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	if (!tmp_map || !*tmp_map)
-	{
-		ft_printf("Error\nFile vuoto o illeggibile\n");
-		free(tmp_map);
+	tmp_map = validate_tmp_map(tmp_map);
+	if (!tmp_map)
 		return (NULL);
-	}
 	map = ft_split(tmp_map, '\n');
 	free(tmp_map);
 	return (map);

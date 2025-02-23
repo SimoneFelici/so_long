@@ -50,6 +50,26 @@ static int	check_walls(char **map, t_map_info *info)
 	return (0);
 }
 
+static int	process_tile(char tile, int i, int j, t_map_info *info)
+{
+	if (tile == 'P')
+	{
+		info->player_count++;
+		if (info->player_count == 1)
+		{
+			info->player_x = j;
+			info->player_y = i;
+		}
+	}
+	else if (tile == 'E')
+		info->exit_count++;
+	else if (tile == 'C')
+		info->collectible_count++;
+	else if (tile != '0' && tile != '1')
+		return (1);
+	return (0);
+}
+
 static int	check_chars_and_count(char **map, t_map_info *info)
 {
 	int	i;
@@ -64,28 +84,18 @@ static int	check_chars_and_count(char **map, t_map_info *info)
 		j = 0;
 		while (j < info->cols)
 		{
-			if (map[i][j] == 'P')
-			{
-				info->player_count++;
-				if (info->player_count == 1)
-				{
-					info->player_x = j;
-					info->player_y = i;
-				}
-			}
-			else if (map[i][j] == 'E')
-				info->exit_count++;
-			else if (map[i][j] == 'C')
-				info->collectible_count++;
-			else if (map[i][j] != '0' && map[i][j] != '1')
+			if (process_tile(map[i][j], i, j, info))
 				return (1);
 			j++;
 		}
 		i++;
 	}
-	if (info->player_count != 1 || info->exit_count != 1 \
-		|| info->collectible_count < 1)
+	if (info->player_count != 1 || \
+		info->exit_count != 1 || \
+		info->collectible_count < 1)
+	{
 		return (1);
+	}
 	return (0);
 }
 
@@ -93,22 +103,22 @@ int	check_map_errors(char **map, t_map_info *info)
 {
 	if (check_rectangular(map, info))
 	{
-		ft_printf("Error\nMappa non rettangolare\n");
+		ft_printf("Error\nMap not rectangular\n");
 		return (1);
 	}
 	if (check_walls(map, info))
 	{
-		ft_printf("Error\nMappa non è chiusa dai muri\n");
+		ft_printf("Error\nMap not surrounded by walls\n");
 		return (1);
 	}
 	if (check_chars_and_count(map, info))
 	{
-		ft_printf("Error\nCaratteri invalidi o numero errato\n");
+		ft_printf("Error\nInvalid chars or wrong numbers\n");
 		return (1);
 	}
 	if (check_path(map, info))
 	{
-		ft_printf("Error\nPATH non trovato\n");
+		ft_printf("Error\nUnable to find a valid path\n");
 		return (1);
 	}
 	return (0);

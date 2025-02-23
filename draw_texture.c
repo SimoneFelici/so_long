@@ -14,45 +14,16 @@
 
 static void	draw_tile(t_vars *vars, char c, int x, int y)
 {
-	if (c != '1')
-	{
-		mlx_put_image_to_window(vars->mlx, vars->win,
-			vars->textures.floor_img,
-			x * GRID_SIZE, y * GRID_SIZE);
-	}
 	if (c == '1')
-	{
-		mlx_put_image_to_window(vars->mlx, vars->win,
-			vars->textures.wall_img,
-			x * GRID_SIZE, y * GRID_SIZE);
-	}
+		draw_wall(vars, x, y);
 	else if (c == 'C')
-	{
-		mlx_put_image_to_window(vars->mlx, vars->win,
-			vars->textures.collectible_img,
-			x * GRID_SIZE, y * GRID_SIZE);
-	}
+		draw_collectible(vars, x, y);
 	else if (c == 'E')
-	{
-		if (vars->map_info.collectible_count > 0)
-		{
-			mlx_put_image_to_window(vars->mlx, vars->win,
-				vars->textures.exit_img_closed,
-				x * GRID_SIZE, y * GRID_SIZE);
-		}
-		else
-		{
-			mlx_put_image_to_window(vars->mlx, vars->win,
-				vars->textures.exit_img_open,
-				x * GRID_SIZE, y * GRID_SIZE);
-		}
-	}
+		draw_exit(vars, x, y);
 	else if (c == 'P')
-	{
-		mlx_put_image_to_window(vars->mlx, vars->win,
-			vars->textures.player_img,
-			x * GRID_SIZE, y * GRID_SIZE);
-	}
+		draw_player(vars, x, y);
+	else
+		draw_floor(vars, x, y);
 }
 
 void	draw_map(t_vars *vars)
@@ -75,40 +46,25 @@ void	draw_map(t_vars *vars)
 
 int	key_press(int keycode, t_vars *vars)
 {
-	int	old_x = vars->map_info.player_x;
-	int	old_y = vars->map_info.player_y;
-	int	new_x = old_x;
-	int	new_y = old_y;
+	t_point	old_pos;
+	t_point	new_pos;
 
+	old_pos.x = vars->map_info.player_x;
+	old_pos.y = vars->map_info.player_y;
+	new_pos = old_pos;
 	if (keycode == 65307)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
 		exit(0);
 	}
-	else if (keycode == 119)
-		new_y--;
-	else if (keycode == 115)
-		new_y++;
-	else if (keycode == 97)
-		new_x--;
-	else if (keycode == 100)
-		new_x++;
-	if (vars->map[new_y][new_x] == '1')
+	update_position(keycode, &new_pos.x, &new_pos.y);
+	if (!is_move_valid(vars, new_pos.x, new_pos.y))
 		return (0);
-	if (vars->map[new_y][new_x] == 'E' && vars->map_info.collectible_count > 0)
-		return (0);
-	if (vars->map[new_y][new_x] == 'C')
-		vars->map_info.collectible_count--;
-	if (vars->map[new_y][new_x] == 'E' && vars->map_info.collectible_count == 0)
-	{
-		ft_printf("You Won in %d moves!\n", vars->move_count++);
-		mlx_destroy_window(vars->mlx, vars->win);
-		exit(0);
-	}
-	vars->map[old_y][old_x] = '0';
-	vars->map[new_y][new_x] = 'P';
-	vars->map_info.player_x = new_x;
-	vars->map_info.player_y = new_y;
+	process_tile(vars, new_pos.x, new_pos.y);
+	vars->map[old_pos.y][old_pos.x] = '0';
+	vars->map[new_pos.y][new_pos.x] = 'P';
+	vars->map_info.player_x = new_pos.x;
+	vars->map_info.player_y = new_pos.y;
 	ft_printf("Number of moves: %d\n", vars->move_count);
 	vars->move_count++;
 	draw_map(vars);
