@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_path.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sfelici <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/21 15:29:25 by sfelici           #+#    #+#             */
+/*   Updated: 2025/02/21 15:29:33 by sfelici          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 static void	dfs(char **map, int row, int col, t_map_info *info, int *collectibles_found, int *exit_found)
@@ -10,8 +22,6 @@ static void	dfs(char **map, int row, int col, t_map_info *info, int *collectible
 		(*collectibles_found)++;
 	else if (map[row][col] == 'E')
 		(*exit_found)++;
-
-	ft_printf("%c\n", map[row][col]);
 	map[row][col] = 'V';
 	dfs(map, row + 1, col, info, collectibles_found, exit_found);
 	dfs(map, row - 1, col, info, collectibles_found, exit_found);

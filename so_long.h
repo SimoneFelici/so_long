@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sfelici <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/21 15:25:44 by sfelici           #+#    #+#             */
+/*   Updated: 2025/02/21 15:26:30 by sfelici          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
@@ -10,7 +22,8 @@
 
 # define GRID_SIZE 64
 
-typedef struct s_textures {
+typedef struct s_textures
+{
 	void	*wall_img;
 	void	*exit_img_closed;
 	void	*exit_img_open;
@@ -20,7 +33,8 @@ typedef struct s_textures {
 	void	*floor_img;
 }	t_textures;
 
-typedef struct s_map_info {
+typedef struct s_map_info
+{
 	int	rows;
 	int	cols;
 	int	player_count;
@@ -30,10 +44,12 @@ typedef struct s_map_info {
 	int	player_y;
 }	t_map_info;
 
-typedef struct s_vars {
+typedef struct s_vars
+{
 	void		*mlx;
 	void		*win;
 	char		**map;
+	int			move_count;
 	t_map_info	map_info;
 	t_textures	textures;
 }	t_vars;
@@ -44,6 +60,6 @@ int		check_map_errors(char **map, t_map_info *info);
 void	draw_map(t_vars *vars);
 int		key_press(int keycode, t_vars *vars);
 void	free_map(char **map);
-int	check_path(char **map, t_map_info *info);
+int		check_path(char **map, t_map_info *info);
 
 #endif

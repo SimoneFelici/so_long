@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_map.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sfelici <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/21 15:23:22 by sfelici           #+#    #+#             */
+/*   Updated: 2025/02/21 15:24:15 by sfelici          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-static int check_rectangular(char **map, t_map_info *info)
+static int	check_rectangular(char **map, t_map_info *info)
 {
-	int i;
+	int	i;
 
 	info->cols = ft_strlen(map[0]);
 	info->rows = 0;
@@ -17,9 +29,9 @@ static int check_rectangular(char **map, t_map_info *info)
 	return (0);
 }
 
-static int check_walls(char **map, t_map_info *info)
+static int	check_walls(char **map, t_map_info *info)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < info->cols)
@@ -38,10 +50,10 @@ static int check_walls(char **map, t_map_info *info)
 	return (0);
 }
 
-static int check_chars_and_count(char **map, t_map_info *info)
+static int	check_chars_and_count(char **map, t_map_info *info)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	info->player_count = 0;
 	info->exit_count = 0;
@@ -71,12 +83,13 @@ static int check_chars_and_count(char **map, t_map_info *info)
 		}
 		i++;
 	}
-	if (info->player_count != 1 || info->exit_count != 1 || info->collectible_count < 1)
+	if (info->player_count != 1 || info->exit_count != 1 \
+		|| info->collectible_count < 1)
 		return (1);
 	return (0);
 }
 
-int check_map_errors(char **map, t_map_info *info)
+int	check_map_errors(char **map, t_map_info *info)
 {
 	if (check_rectangular(map, info))
 	{

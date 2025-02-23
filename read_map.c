@@ -1,4 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sfelici <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/21 15:14:18 by sfelici           #+#    #+#             */
+/*   Updated: 2025/02/21 15:21:46 by sfelici          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
+
+static int	ft_opener(const char *file_path)
+{
+	int	fd;
+
+	fd = open(file_path, O_RDONLY);
+	if (fd < 0)
+	{
+		ft_printf("Error\nImpossibile aprire il file %s\n", file_path);
+		return (NULL);
+	}
+	return (fd);
+}
 
 char	**read_map(const char *file_path)
 {
@@ -8,19 +33,16 @@ char	**read_map(const char *file_path)
 	char	*tmp_map;
 	char	*tmp_join;
 
-	fd = open(file_path, O_RDONLY);
-	if (fd < 0)
-	{
-		ft_printf("Error\nImpossibile aprire il file %s\n", file_path);
-		return (NULL);
-	}
+	fd = ft_opener(file_path);
 	tmp_map = ft_calloc(1, 1);
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		tmp_join = ft_strjoin(tmp_map, line);
 		free(tmp_map);
 		tmp_map = tmp_join;
 		free(line);
+		line = get_next_line(fd);
 	}
 	close(fd);
 	if (!tmp_map || !*tmp_map)

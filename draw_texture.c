@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_texture.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sfelici <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/21 15:27:18 by sfelici           #+#    #+#             */
+/*   Updated: 2025/02/21 15:27:47 by sfelici          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-static void draw_tile(t_vars *vars, char c, int x, int y)
+static void	draw_tile(t_vars *vars, char c, int x, int y)
 {
 	if (c != '1')
 	{
@@ -43,10 +55,10 @@ static void draw_tile(t_vars *vars, char c, int x, int y)
 	}
 }
 
-void draw_map(t_vars *vars)
+void	draw_map(t_vars *vars)
 {
-	int y;
-	int x;
+	int	y;
+	int	x;
 
 	y = 0;
 	while (y < vars->map_info.rows)
@@ -89,7 +101,7 @@ int	key_press(int keycode, t_vars *vars)
 		vars->map_info.collectible_count--;
 	if (vars->map[new_y][new_x] == 'E' && vars->map_info.collectible_count == 0)
 	{
-		ft_printf("You Won! :fire:\n");
+		ft_printf("You Won in %d moves!\n", vars->move_count++);
 		mlx_destroy_window(vars->mlx, vars->win);
 		exit(0);
 	}
@@ -97,7 +109,8 @@ int	key_press(int keycode, t_vars *vars)
 	vars->map[new_y][new_x] = 'P';
 	vars->map_info.player_x = new_x;
 	vars->map_info.player_y = new_y;
-	//ft_printf("%d\n%d", vars->map_info.player_x, vars->map_info.player_y);
+	ft_printf("Number of moves: %d\n", vars->move_count);
+	vars->move_count++;
 	draw_map(vars);
 	return (0);
 }
