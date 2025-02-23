@@ -54,7 +54,7 @@ int	key_press(int keycode, t_vars *vars)
 	new_pos = old_pos;
 	if (keycode == 65307)
 	{
-		mlx_destroy_window(vars->mlx, vars->win);
+		ft_cleanup(vars);
 		exit(0);
 	}
 	update_position(keycode, &new_pos.x, &new_pos.y);

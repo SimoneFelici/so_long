@@ -50,7 +50,7 @@ static int	check_walls(char **map, t_map_info *info)
 	return (0);
 }
 
-static int	process_tile(char tile, int i, int j, t_map_info *info)
+static int validate_tile(char tile, int i, int j, t_map_info *info)
 {
 	if (tile == 'P')
 	{
@@ -84,7 +84,7 @@ static int	check_chars_and_count(char **map, t_map_info *info)
 		j = 0;
 		while (j < info->cols)
 		{
-			if (process_tile(map[i][j], i, j, info))
+			if (validate_tile(map[i][j], i, j, info))
 				return (1);
 			j++;
 		}

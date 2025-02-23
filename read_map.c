@@ -20,7 +20,7 @@ static int	ft_opener(const char *file_path)
 	if (fd < 0)
 	{
 		ft_printf("Error\nCan't open file %s\n", file_path);
-		return (NULL);
+		return (-1);
 	}
 	return (fd);
 }

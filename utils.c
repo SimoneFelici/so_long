@@ -12,6 +12,32 @@
 
 #include "so_long.h"
 
+void ft_cleanup(t_vars *vars)
+{
+    if (vars->textures.player_img)
+        mlx_destroy_image(vars->mlx, vars->textures.player_img);
+    if (vars->textures.floor_img)
+        mlx_destroy_image(vars->mlx, vars->textures.floor_img);
+    if (vars->textures.wall_img)
+        mlx_destroy_image(vars->mlx, vars->textures.wall_img);
+    if (vars->textures.collectible_img)
+        mlx_destroy_image(vars->mlx, vars->textures.collectible_img);
+    if (vars->textures.exit_img_closed)
+        mlx_destroy_image(vars->mlx, vars->textures.exit_img_closed);
+    if (vars->textures.exit_img_open)
+        mlx_destroy_image(vars->mlx, vars->textures.exit_img_open);
+    free_map(vars->map);
+    if (vars->win)
+        mlx_destroy_window(vars->mlx, vars->win);
+    
+    if (vars->mlx)
+    {
+        mlx_destroy_display(vars->mlx);
+        free(vars->mlx);
+    }
+}
+
+
 void	free_map(char **map)
 {
 	int	i;
@@ -55,7 +81,7 @@ void	process_tile(t_vars *vars, int new_x, int new_y)
 	if (vars->map[new_y][new_x] == 'E' && vars->map_info.collectible_count == 0)
 	{
 		ft_printf("You Won in %d moves!\n", vars->move_count++);
-		mlx_destroy_window(vars->mlx, vars->win);
+		ft_cleanup(vars);
 		exit(0);
 	}
 }

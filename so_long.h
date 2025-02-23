@@ -35,7 +35,6 @@ typedef struct s_textures
 	void	*exit_img_open;
 	void	*collectible_img;
 	void	*player_img;
-	void	*player_img2;
 	void	*floor_img;
 }	t_textures;
 
@@ -81,5 +80,10 @@ void	draw_wall(t_vars *vars, int x, int y);
 void	draw_collectible(t_vars *vars, int x, int y);
 void	draw_exit(t_vars *vars, int x, int y);
 void	draw_player(t_vars *vars, int x, int y);
+void	ft_cleanup(t_vars *vars);
+void	update_position(int keycode, int *new_x, int *new_y);
+int		is_move_valid(t_vars *vars, int new_x, int new_y);
+void	process_tile(t_vars *vars, int new_x, int new_y);
+
 
 #endif

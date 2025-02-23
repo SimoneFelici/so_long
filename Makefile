@@ -1,6 +1,6 @@
 NAME = so_long
 CC = clang
-CFLAGS = #-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 SRC = main.c draw_texture.c read_map.c utils.c validate_map.c check_path.c pencils.c
 OBJ = $(SRC:.c=.o)
