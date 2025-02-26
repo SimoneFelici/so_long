@@ -14,7 +14,7 @@
 
 int	close_game(t_vars *vars)
 {
-	mlx_destroy_window(vars->mlx, vars->win);
+	ft_cleanup(vars);
 	exit(0);
 	return (0);
 }

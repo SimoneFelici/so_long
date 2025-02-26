@@ -50,7 +50,7 @@ static int	check_walls(char **map, t_map_info *info)
 	return (0);
 }
 
-static int validate_tile(char tile, int i, int j, t_map_info *info)
+static int	validate_tile(char tile, int i, int j, t_map_info *info)
 {
 	if (tile == 'P')
 	{
