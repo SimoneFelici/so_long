@@ -22,7 +22,11 @@ static void	perform_dfs(t_dfs_info *dfs_data, int row, int col)
 	if (dfs_data->map[row][col] == 'C')
 		(*(dfs_data->collectibles_found))++;
 	else if (dfs_data->map[row][col] == 'E')
+	{
 		(*(dfs_data->exit_found))++;
+		dfs_data->map[row][col] = 'V';
+		return ;
+	}
 	dfs_data->map[row][col] = 'V';
 	perform_dfs(dfs_data, row + 1, col);
 	perform_dfs(dfs_data, row - 1, col);

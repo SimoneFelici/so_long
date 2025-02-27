@@ -58,6 +58,8 @@ int	key_press(int keycode, t_vars *vars)
 		exit(0);
 	}
 	update_position(keycode, &new_pos.x, &new_pos.y);
+	if (old_pos.x == new_pos.x && old_pos.y == new_pos.y)
+		return (0);
 	if (!is_move_valid(vars, new_pos.x, new_pos.y))
 		return (0);
 	process_tile(vars, new_pos.x, new_pos.y);
@@ -65,8 +67,8 @@ int	key_press(int keycode, t_vars *vars)
 	vars->map[new_pos.y][new_pos.x] = 'P';
 	vars->map_info.player_x = new_pos.x;
 	vars->map_info.player_y = new_pos.y;
-	ft_printf("Number of moves: %d\n", vars->move_count);
 	vars->move_count++;
+	ft_printf("Number of moves: %d\n", vars->move_count);
 	draw_map(vars);
 	return (0);
 }
