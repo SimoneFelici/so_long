@@ -44,27 +44,26 @@ int	main(int argc, char **argv)
 	t_vars	vars;
 
 	ft_bzero(&vars, sizeof(t_vars));
-	if (argc != 2)
+	if (argc == 2)
 	{
-		return (1);
-	}
-	vars.map = read_map(argv[1]);
-	if (!vars.map)
-		return (1);
-	if (check_map_errors(vars.map, &vars.map_info))
-	{
+		vars.map = read_map(argv[1]);
+		if (!vars.map)
+			return (1);
+		if (check_map_errors(vars.map, &vars.map_info))
+		{
+			free_map(vars.map);
+			return (1);
+		}
+		vars.mlx = mlx_init();
+		vars.win = mlx_new_window(vars.mlx, \
+			vars.map_info.cols * GRID_SIZE, \
+			vars.map_info.rows * GRID_SIZE, \
+			"So Long");
+		init_textures(&vars);
+		draw_map(&vars);
+		mlx_hook(vars.win, 2, 1L << 0, key_press, &vars);
+		mlx_hook(vars.win, 17, 0, close_game, &vars);
+		mlx_loop(vars.mlx);
 		free_map(vars.map);
-		return (1);
 	}
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, \
-		vars.map_info.cols * GRID_SIZE, \
-		vars.map_info.rows * GRID_SIZE, \
-		"So Long");
-	init_textures(&vars);
-	draw_map(&vars);
-	mlx_hook(vars.win, 2, 1L << 0, key_press, &vars);
-	mlx_hook(vars.win, 17, 0, close_game, &vars);
-	mlx_loop(vars.mlx);
-	free_map(vars.map);
 }
