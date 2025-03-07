@@ -44,7 +44,6 @@ int	main(int argc, char **argv)
 	t_vars	vars;
 
 	ft_bzero(&vars, sizeof(t_vars));
-
 	if (argc != 2)
 	{
 		return (1);
