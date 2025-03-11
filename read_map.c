@@ -47,7 +47,7 @@ char	**read_map(const char *file_path)
 	fd = ft_opener(file_path);
 	tmp_map = ft_calloc(1, 1);
 	line = get_next_line(fd);
-	while (line != NULL)
+	while (line != NULL && ft_strncmp(line, "\n", 1))
 	{
 		tmp_join = ft_strjoin(tmp_map, line);
 		free(tmp_map);

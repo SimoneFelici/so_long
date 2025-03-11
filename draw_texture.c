@@ -67,8 +67,8 @@ int	key_press(int keycode, t_vars *vars)
 	vars->map[new_pos.y][new_pos.x] = 'P';
 	vars->map_info.player_x = new_pos.x;
 	vars->map_info.player_y = new_pos.y;
-	vars->move_count++;
-	ft_printf("Number of moves: %d\n", vars->move_count);
+	//vars->move_count++;
+	ft_printf("Number of moves: %d\n", ++vars->move_count);
 	draw_map(vars);
 	return (0);
 }

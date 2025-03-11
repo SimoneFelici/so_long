@@ -78,7 +78,7 @@ void	process_tile(t_vars *vars, int new_x, int new_y)
 		vars->map_info.collectible_count--;
 	if (vars->map[new_y][new_x] == 'E' && vars->map_info.collectible_count == 0)
 	{
-		ft_printf("You Won in %d moves!\n", vars->move_count++);
+		ft_printf("You Won in %d moves!\n", ++vars->move_count);
 		ft_cleanup(vars);
 		exit(0);
 	}

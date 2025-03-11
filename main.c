@@ -59,6 +59,7 @@ int	main(int argc, char **argv)
 			vars.map_info.cols * GRID_SIZE, \
 			vars.map_info.rows * GRID_SIZE, \
 			"So Long");
+		sleep(1);
 		init_textures(&vars);
 		draw_map(&vars);
 		mlx_hook(vars.win, 2, 1L << 0, key_press, &vars);
