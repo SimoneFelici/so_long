@@ -48,7 +48,8 @@ int	key_press(int keycode, t_vars *vars)
 {
 	t_point	old_pos;
 	t_point	new_pos;
-
+	char	*count_str;
+ 
 	old_pos.x = vars->map_info.player_x;
 	old_pos.y = vars->map_info.player_y;
 	new_pos = old_pos;
@@ -67,8 +68,10 @@ int	key_press(int keycode, t_vars *vars)
 	vars->map[new_pos.y][new_pos.x] = 'P';
 	vars->map_info.player_x = new_pos.x;
 	vars->map_info.player_y = new_pos.y;
-	//vars->move_count++;
-	ft_printf("Number of moves: %d\n", ++vars->move_count);
 	draw_map(vars);
+	count_str = ft_itoa(++vars->move_count);
+	mlx_string_put(vars->mlx, vars->win, 10, 10, 0xFFFFFF, count_str);
+	free(count_str);
 	return (0);
 }
+

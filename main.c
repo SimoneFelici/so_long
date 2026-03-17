@@ -24,18 +24,18 @@ int	init_textures(t_vars *vars)
 	int	w;
 	int	h;
 
-	vars->textures.wall_img = mlx_xpm_file_to_image(vars->mlx, \
-		"textures/cobblestone.xpm", &w, &h);
-	vars->textures.floor_img = mlx_xpm_file_to_image(vars->mlx, \
-		"textures/grass.xpm", &w, &h);
-	vars->textures.collectible_img = mlx_xpm_file_to_image(vars->mlx, \
-		"textures/ender_eye.xpm", &w, &h);
-	vars->textures.exit_img_closed = mlx_xpm_file_to_image(vars->mlx, \
-		"textures/end_portal_closed.xpm", &w, &h);
-	vars->textures.exit_img_open = mlx_xpm_file_to_image(vars->mlx, \
-		"textures/end_portal_open.xpm", &w, &h);
-	vars->textures.player_img = mlx_xpm_file_to_image(vars->mlx, \
-		"textures/player.xpm", &w, &h);
+	vars->textures.wall_img = mlx_xpm_file_to_image(vars->mlx,
+			"textures/cobblestone.xpm", &w, &h);
+	vars->textures.floor_img = mlx_xpm_file_to_image(vars->mlx,
+			"textures/grass.xpm", &w, &h);
+	vars->textures.collectible_img = mlx_xpm_file_to_image(vars->mlx,
+			"textures/ender_eye.xpm", &w, &h);
+	vars->textures.exit_img_closed = mlx_xpm_file_to_image(vars->mlx,
+			"textures/end_portal_closed.xpm", &w, &h);
+	vars->textures.exit_img_open = mlx_xpm_file_to_image(vars->mlx,
+			"textures/end_portal_open.xpm", &w, &h);
+	vars->textures.player_img = mlx_xpm_file_to_image(vars->mlx,
+			"textures/player.xpm", &w, &h);
 	return (0);
 }
 
@@ -55,10 +55,9 @@ int	main(int argc, char **argv)
 			return (1);
 		}
 		vars.mlx = mlx_init();
-		vars.win = mlx_new_window(vars.mlx, \
-			vars.map_info.cols * GRID_SIZE, \
-			vars.map_info.rows * GRID_SIZE, \
-			"So Long");
+		vars.win = mlx_new_window(vars.mlx,
+				vars.map_info.cols * GRID_SIZE,
+				vars.map_info.rows * GRID_SIZE, "So Long");
 		sleep(1);
 		init_textures(&vars);
 		draw_map(&vars);

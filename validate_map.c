@@ -90,9 +90,9 @@ static int	check_chars_and_count(char **map, t_map_info *info)
 		}
 		i++;
 	}
-	if (info->player_count != 1 || \
-		info->exit_count != 1 || \
-		info->collectible_count < 1)
+	if (info->player_count != 1
+		|| info->exit_count != 1
+		|| info->collectible_count < 1)
 	{
 		return (1);
 	}
