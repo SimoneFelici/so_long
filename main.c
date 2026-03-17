@@ -45,6 +45,21 @@ int	init_textures(t_vars *vars)
 	return (0);
 }
 
+static void	init_game(t_vars *vars)
+{
+	vars->mlx = mlx_init();
+	vars->win = mlx_new_window(vars->mlx,
+			vars->map_info.cols * GRID_SIZE,
+			vars->map_info.rows * GRID_SIZE, "So Long");
+	sleep(1);
+	init_textures(vars);
+	init_enemies(vars);
+	draw_map(vars);
+	mlx_hook(vars->win, 2, 1L << 0, key_press, vars);
+	mlx_hook(vars->win, 17, 0, close_game, vars);
+	mlx_loop(vars->mlx);
+}
+
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
@@ -60,17 +75,7 @@ int	main(int argc, char **argv)
 			free_map(vars.map);
 			return (1);
 		}
-		vars.mlx = mlx_init();
-		vars.win = mlx_new_window(vars.mlx,
-				vars.map_info.cols * GRID_SIZE,
-				vars.map_info.rows * GRID_SIZE, "So Long");
-		sleep(1);
-		init_textures(&vars);
-		init_enemies(&vars);
-		draw_map(&vars);
-		mlx_hook(vars.win, 2, 1L << 0, key_press, &vars);
-		mlx_hook(vars.win, 17, 0, close_game, &vars);
-		mlx_loop(vars.mlx);
-		free_map(vars.map);
+		init_game(&vars);
 	}
+	return (0);
 }

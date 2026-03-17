@@ -52,3 +52,23 @@ void	show_flint(t_vars *vars)
 	usleep(150000);
 	draw_map(vars);
 }
+
+void	handle_kill(int keycode, t_vars *vars)
+{
+	int	px;
+	int	py;
+
+	if (keycode != 101)
+		return ;
+	show_flint(vars);
+	px = vars->map_info.player_x;
+	py = vars->map_info.player_y;
+	if (vars->map[py - 1][px] == 'V')
+		kill_enemy(vars, px, py - 1);
+	else if (vars->map[py + 1][px] == 'V')
+		kill_enemy(vars, px, py + 1);
+	else if (vars->map[py][px - 1] == 'V')
+		kill_enemy(vars, px - 1, py);
+	else if (vars->map[py][px + 1] == 'V')
+		kill_enemy(vars, px + 1, py);
+}

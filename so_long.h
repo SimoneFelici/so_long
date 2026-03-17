@@ -106,5 +106,7 @@ void	kill_enemy(t_vars *vars, int x, int y);
 void	show_flint(t_vars *vars);
 void	init_enemies(t_vars *vars);
 void	move_enemies(t_vars *vars);
+void	ft_cleanup_textures(t_vars *vars);
+void	handle_kill(int keycode, t_vars *vars);
 
 #endif

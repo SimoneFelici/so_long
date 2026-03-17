@@ -55,27 +55,7 @@ static void	victory_print(t_vars *vars)
 	free(count_str);
 }
 
-static void	handle_kill(int keycode, t_vars *vars)
-{
-	int	px;
-	int	py;
-
-	if (keycode != 101)
-		return ;
-	show_flint(vars);
-	px = vars->map_info.player_x;
-	py = vars->map_info.player_y;
-	if (vars->map[py - 1][px] == 'V')
-		kill_enemy(vars, px, py - 1);
-	else if (vars->map[py + 1][px] == 'V')
-		kill_enemy(vars, px, py + 1);
-	else if (vars->map[py][px - 1] == 'V')
-		kill_enemy(vars, px - 1, py);
-	else if (vars->map[py][px + 1] == 'V')
-		kill_enemy(vars, px + 1, py);
-}
-
-int	key_press(int keycode, t_vars *vars)
+static int	move_player(int keycode, t_vars *vars)
 {
 	t_point	old_pos;
 	t_point	new_pos;
@@ -83,12 +63,6 @@ int	key_press(int keycode, t_vars *vars)
 	old_pos.x = vars->map_info.player_x;
 	old_pos.y = vars->map_info.player_y;
 	new_pos = old_pos;
-	if (keycode == 65307)
-	{
-		ft_cleanup(vars);
-		exit(0);
-	}
-	handle_kill(keycode, vars);
 	update_position(keycode, &new_pos.x, &new_pos.y);
 	if (old_pos.x == new_pos.x && old_pos.y == new_pos.y)
 		return (0);
@@ -105,4 +79,15 @@ int	key_press(int keycode, t_vars *vars)
 	draw_map(vars);
 	victory_print(vars);
 	return (0);
+}
+
+int	key_press(int keycode, t_vars *vars)
+{
+	if (keycode == 65307)
+	{
+		ft_cleanup(vars);
+		exit(0);
+	}
+	handle_kill(keycode, vars);
+	return (move_player(keycode, vars));
 }
