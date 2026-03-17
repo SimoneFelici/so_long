@@ -74,11 +74,20 @@ int	is_move_valid(t_vars *vars, int new_x, int new_y)
 
 void	process_tile(t_vars *vars, int new_x, int new_y)
 {
+	char	*num;
+	char	*msg;
+
 	if (vars->map[new_y][new_x] == 'C')
 		vars->map_info.collectible_count--;
 	if (vars->map[new_y][new_x] == 'E' && vars->map_info.collectible_count == 0)
 	{
-		ft_printf("You Won in %d moves!\n", ++vars->move_count);
+		draw_map(vars);
+		num = ft_itoa(++vars->move_count);
+		msg = ft_strjoin("You won in moves: ", num);
+		free(num);
+		mlx_string_put(vars->mlx, vars->win, 10, 10, 0xFFFFFF, msg);
+		free(msg);
+		sleep(2);
 		ft_cleanup(vars);
 		exit(0);
 	}
