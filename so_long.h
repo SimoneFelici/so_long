@@ -36,6 +36,7 @@ typedef struct s_textures
 	void	*collectible_img;
 	void	*player_img;
 	void	*floor_img;
+	void	*enemy_img;
 }	t_textures;
 
 typedef struct s_map_info

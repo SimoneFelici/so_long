@@ -22,6 +22,8 @@ static void	draw_tile(t_vars *vars, char c, int x, int y)
 		draw_exit(vars, x, y);
 	else if (c == 'P')
 		draw_player(vars, x, y);
+	else if (c == 'V')
+		draw_enemy(vars, x, y);
 	else
 		draw_floor(vars, x, y);
 }

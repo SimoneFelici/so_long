@@ -36,6 +36,8 @@ int	init_textures(t_vars *vars)
 			"textures/end_portal_open.xpm", &w, &h);
 	vars->textures.player_img = mlx_xpm_file_to_image(vars->mlx,
 			"textures/player.xpm", &w, &h);
+	vars->textures.enemy_img = mlx_xpm_file_to_image(vars->mlx,
+			"textures/enemy.xpm", &w, &h);
 	return (0);
 }
 

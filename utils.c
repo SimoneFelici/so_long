@@ -67,6 +67,8 @@ int	is_move_valid(t_vars *vars, int new_x, int new_y)
 {
 	if (vars->map[new_y][new_x] == '1')
 		return (0);
+	if (vars->map[new_y][new_x] == 'V')
+		return (0);
 	if (vars->map[new_y][new_x] == 'E' && vars->map_info.collectible_count > 0)
 		return (0);
 	return (1);
