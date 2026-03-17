@@ -26,6 +26,12 @@ void	ft_cleanup(t_vars *vars)
 		mlx_destroy_image(vars->mlx, vars->textures.exit_img_closed);
 	if (vars->textures.exit_img_open)
 		mlx_destroy_image(vars->mlx, vars->textures.exit_img_open);
+	if (vars->textures.enemy_img)
+		mlx_destroy_image(vars->mlx, vars->textures.enemy_img);
+	if (vars->textures.explosion_img)
+		mlx_destroy_image(vars->mlx, vars->textures.explosion_img);
+	if (vars->textures.flint_img)
+		mlx_destroy_image(vars->mlx, vars->textures.flint_img);
 	free_map(vars->map);
 	if (vars->win)
 		mlx_destroy_window(vars->mlx, vars->win);
@@ -67,8 +73,6 @@ int	is_move_valid(t_vars *vars, int new_x, int new_y)
 {
 	if (vars->map[new_y][new_x] == '1')
 		return (0);
-	if (vars->map[new_y][new_x] == 'V')
-		return (0);
 	if (vars->map[new_y][new_x] == 'E' && vars->map_info.collectible_count > 0)
 		return (0);
 	return (1);
@@ -79,6 +83,8 @@ void	process_tile(t_vars *vars, int new_x, int new_y)
 	char	*num;
 	char	*msg;
 
+	if (vars->map[new_y][new_x] == 'V')
+		game_over(vars);
 	if (vars->map[new_y][new_x] == 'C')
 		vars->map_info.collectible_count--;
 	if (vars->map[new_y][new_x] == 'E' && vars->map_info.collectible_count == 0)

@@ -21,12 +21,21 @@
 # include <stdio.h>
 
 # define GRID_SIZE 64
+# define MAX_ENEMIES 16
 
 typedef struct s_point
 {
 	int	x;
 	int	y;
 }	t_point;
+
+typedef struct s_enemy
+{
+	int	x;
+	int	y;
+	int	dir_x;
+	int	dir_y;
+}	t_enemy;
 
 typedef struct s_textures
 {
@@ -37,6 +46,8 @@ typedef struct s_textures
 	void	*player_img;
 	void	*floor_img;
 	void	*enemy_img;
+	void	*explosion_img;
+	void	*flint_img;
 }	t_textures;
 
 typedef struct s_map_info
@@ -58,6 +69,7 @@ typedef struct s_dfs_info
 	int			*exit_found;
 }	t_dfs_info;
 
+
 typedef struct s_vars
 {
 	void		*mlx;
@@ -67,6 +79,8 @@ typedef struct s_vars
 	t_map_info	map_info;
 	t_textures	textures;
 	t_point		player_pos;
+	t_enemy		enemies[MAX_ENEMIES];
+	int			enemy_count;
 }	t_vars;
 
 int		ft_printf(const char *format, ...);
@@ -87,5 +101,10 @@ int		is_move_valid(t_vars *vars, int new_x, int new_y);
 void	process_tile(t_vars *vars, int new_x, int new_y);
 
 void	draw_enemy(t_vars *vars, int x, int y);
+void	game_over(t_vars *vars);
+void	kill_enemy(t_vars *vars, int x, int y);
+void	show_flint(t_vars *vars);
+void	init_enemies(t_vars *vars);
+void	move_enemies(t_vars *vars);
 
 #endif

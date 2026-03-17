@@ -17,17 +17,17 @@ static void	perform_dfs(t_dfs_info *dfs_data, int row, int col)
 	if (row < 0 || row >= dfs_data->info->rows
 		|| col < 0 || col >= dfs_data->info->cols)
 		return ;
-	if (dfs_data->map[row][col] == '1' || dfs_data->map[row][col] == 'V')
+	if (dfs_data->map[row][col] == '1' || dfs_data->map[row][col] == 'X')
 		return ;
 	if (dfs_data->map[row][col] == 'C')
 		(*(dfs_data->collectibles_found))++;
 	else if (dfs_data->map[row][col] == 'E')
 	{
 		(*(dfs_data->exit_found))++;
-		dfs_data->map[row][col] = 'V';
+		dfs_data->map[row][col] = 'X';
 		return ;
 	}
-	dfs_data->map[row][col] = 'V';
+	dfs_data->map[row][col] = 'X';
 	perform_dfs(dfs_data, row + 1, col);
 	perform_dfs(dfs_data, row - 1, col);
 	perform_dfs(dfs_data, row, col + 1);

@@ -38,6 +38,10 @@ int	init_textures(t_vars *vars)
 			"textures/player.xpm", &w, &h);
 	vars->textures.enemy_img = mlx_xpm_file_to_image(vars->mlx,
 			"textures/enemy.xpm", &w, &h);
+	vars->textures.explosion_img = mlx_xpm_file_to_image(vars->mlx,
+			"textures/explosion.xpm", &w, &h);
+	vars->textures.flint_img = mlx_xpm_file_to_image(vars->mlx,
+			"textures/flint.xpm", &w, &h);
 	return (0);
 }
 
@@ -62,6 +66,7 @@ int	main(int argc, char **argv)
 				vars.map_info.rows * GRID_SIZE, "So Long");
 		sleep(1);
 		init_textures(&vars);
+		init_enemies(&vars);
 		draw_map(&vars);
 		mlx_hook(vars.win, 2, 1L << 0, key_press, &vars);
 		mlx_hook(vars.win, 17, 0, close_game, &vars);
