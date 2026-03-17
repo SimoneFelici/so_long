@@ -88,7 +88,7 @@ void	process_tile(t_vars *vars, int new_x, int new_y)
 		mlx_string_put(vars->mlx, vars->win, 10, 10, 0xFFFFFF, msg);
 		free(msg);
 		mlx_do_sync(vars->mlx);
-		sleep(2);
+		sleep(1);
 		ft_cleanup(vars);
 		exit(0);
 	}

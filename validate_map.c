@@ -65,6 +65,8 @@ static int	validate_tile(char tile, int i, int j, t_map_info *info)
 		info->exit_count++;
 	else if (tile == 'C')
 		info->collectible_count++;
+	else if (tile == 'V')
+		return (0);
 	else if (tile != '0' && tile != '1')
 		return (1);
 	return (0);

@@ -85,4 +85,6 @@ void	update_position(int keycode, int *new_x, int *new_y);
 int		is_move_valid(t_vars *vars, int new_x, int new_y);
 void	process_tile(t_vars *vars, int new_x, int new_y);
 
+void	draw_enemy(t_vars *vars, int x, int y);
+
 #endif
