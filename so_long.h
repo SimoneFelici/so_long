@@ -108,5 +108,7 @@ void	init_enemies(t_vars *vars);
 void	move_enemies(t_vars *vars);
 void	ft_cleanup_textures(t_vars *vars);
 void	handle_kill(int keycode, t_vars *vars);
+unsigned int	get_pixel_color(t_texture *texture, int x, int y);
+void	put_pixel(t_game *game, int x, int y, int color);
 
 #endif

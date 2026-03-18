@@ -52,6 +52,7 @@ static void	victory_print(t_vars *vars)
 
 	count_str = ft_itoa(++vars->move_count);
 	mlx_string_put(vars->mlx, vars->win, 10, 10, 0xFFFFFF, count_str);
+	mlx_string_put(vars->mlx, vars->win, 10, 10 + 1, 0xFFFFFF, count_str);
 	free(count_str);
 }
 

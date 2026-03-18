@@ -77,6 +77,7 @@ void	process_tile(t_vars *vars, int new_x, int new_y)
 		msg = ft_strjoin("You won in moves: ", num);
 		free(num);
 		mlx_string_put(vars->mlx, vars->win, 10, 10, 0xFFFFFF, msg);
+		mlx_string_put(vars->mlx, vars->win, 10, 10 + 1, 0xFFFFFF, msg);
 		free(msg);
 		mlx_do_sync(vars->mlx);
 		sleep(1);

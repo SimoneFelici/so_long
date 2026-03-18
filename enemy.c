@@ -10,6 +10,7 @@ void	game_over(t_vars *vars)
 {
 	kill_enemy(vars, vars->map_info.player_x, vars->map_info.player_y);
 	mlx_string_put(vars->mlx, vars->win, 10, 10, 0xFF0000, "GAME OVER!");
+	mlx_string_put(vars->mlx, vars->win, 10, 10 + 1, 0xFF0000, "GAME OVER!");
 	mlx_do_sync(vars->mlx);
 	sleep(2);
 	ft_cleanup(vars);
