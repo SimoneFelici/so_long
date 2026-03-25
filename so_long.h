@@ -113,9 +113,10 @@ void	move_enemies(t_vars *vars);
 
 // UTILS
 void	game_over(t_vars *vars);
-void	kill_enemy(t_vars *vars, int x, int y);
-void	show_flint(t_vars *vars);
+
+// ENEMY
 void	init_enemies(t_vars *vars);
 void	handle_kill(t_vars *vars);
+void	kill_enemy(t_vars *vars, int x, int y);
 
 #endif
