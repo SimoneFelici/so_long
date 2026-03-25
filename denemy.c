@@ -28,35 +28,31 @@ void	init_enemies(t_vars *vars)
 	vars->enemy_count = n;
 }
 
-static void	move_single_enemy(t_vars *vars, int i)
+void	move_enemies(t_vars *vars)
 {
+	int		i;
 	int		nx;
 	int		ny;
 	char	next;
 
-	nx = vars->enemies[i].x + vars->enemies[i].dir_x;
-	ny = vars->enemies[i].y + vars->enemies[i].dir_y;
-	next = vars->map[ny][nx];
-	if (next == '1' || next == 'C' || next == 'E' || next == 'P')
-	{
-		vars->enemies[i].dir_x *= -1;
-		vars->enemies[i].dir_y *= -1;
-		return ;
-	}
-	vars->map[vars->enemies[i].y][vars->enemies[i].x] = '0';
-	vars->enemies[i].x = nx;
-	vars->enemies[i].y = ny;
-	vars->map[ny][nx] = 'V';
-}
-
-void	move_enemies(t_vars *vars)
-{
-	int	i;
-
 	i = 0;
 	while (i < vars->enemy_count)
 	{
-		move_single_enemy(vars, i);
+		nx = vars->enemies[i].x + vars->enemies[i].dir_x;
+		ny = vars->enemies[i].y + vars->enemies[i].dir_y;
+		next = vars->map[ny][nx];
+		if (next == '1' || next == 'C' || next == 'E' || next == 'P')
+		{
+			vars->enemies[i].dir_x *= -1;
+			vars->enemies[i].dir_y *= -1;
+		}
+		else
+		{
+			vars->map[vars->enemies[i].y][vars->enemies[i].x] = '0';
+			vars->enemies[i].x = nx;
+			vars->enemies[i].y = ny;
+			vars->map[ny][nx] = 'V';
+		}
 		i++;
 	}
 }

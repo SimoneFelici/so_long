@@ -84,29 +84,38 @@ typedef struct s_vars
 }	t_vars;
 
 int		ft_printf(const char *format, ...);
+
+// PARSER
 char	**read_map(const char *file_path);
 int		check_map_errors(char **map, t_map_info *info);
-void	draw_map(t_vars *vars);
-int		key_press(int keycode, t_vars *vars);
-void	free_map(char **map);
 int		check_path(char **map, t_map_info *info);
+int		is_move_valid(t_vars *vars, int new_x, int new_y);
+
+// DRAWERS
+void	draw_map(t_vars *vars);
 void	draw_floor(t_vars *vars, int x, int y);
 void	draw_wall(t_vars *vars, int x, int y);
 void	draw_collectible(t_vars *vars, int x, int y);
 void	draw_exit(t_vars *vars, int x, int y);
 void	draw_player(t_vars *vars, int x, int y);
-void	ft_cleanup(t_vars *vars);
-void	update_position(int keycode, int *new_x, int *new_y);
-int		is_move_valid(t_vars *vars, int new_x, int new_y);
-void	process_tile(t_vars *vars, int new_x, int new_y);
-
 void	draw_enemy(t_vars *vars, int x, int y);
+void	draw_flint(t_vars *vars, int x, int y);
+
+// CLEANUP
+void	ft_cleanup(t_vars *vars);
+void	free_map(char **map);
+void	ft_cleanup_textures(t_vars *vars);
+
+// MOVEMENT
+int		key_press(int keycode, t_vars *vars);
+void	process_tile(t_vars *vars, int new_x, int new_y);
+void	move_enemies(t_vars *vars);
+
+// UTILS
 void	game_over(t_vars *vars);
 void	kill_enemy(t_vars *vars, int x, int y);
 void	show_flint(t_vars *vars);
 void	init_enemies(t_vars *vars);
-void	move_enemies(t_vars *vars);
-void	ft_cleanup_textures(t_vars *vars);
-void	handle_kill(int keycode, t_vars *vars);
+void	handle_kill(t_vars *vars);
 
 #endif

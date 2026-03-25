@@ -56,17 +56,15 @@ static void	victory_print(t_vars *vars)
 	free(count_str);
 }
 
-static int	move_player(int keycode, t_vars *vars)
+static int	move_player(t_vars *vars, int dx, int dy)
 {
 	t_point	old_pos;
 	t_point	new_pos;
 
 	old_pos.x = vars->map_info.player_x;
 	old_pos.y = vars->map_info.player_y;
-	new_pos = old_pos;
-	update_position(keycode, &new_pos.x, &new_pos.y);
-	if (old_pos.x == new_pos.x && old_pos.y == new_pos.y)
-		return (0);
+	new_pos.x = old_pos.x + dx;
+	new_pos.y = old_pos.y + dy;
 	if (!is_move_valid(vars, new_pos.x, new_pos.y))
 		return (0);
 	process_tile(vars, new_pos.x, new_pos.y);
@@ -75,7 +73,7 @@ static int	move_player(int keycode, t_vars *vars)
 	vars->map_info.player_x = new_pos.x;
 	vars->map_info.player_y = new_pos.y;
 	move_enemies(vars);
-	if (vars->map[vars->map_info.player_y][vars->map_info.player_x] == 'V')
+	if (vars->map[new_pos.y][new_pos.x] == 'V')
 		game_over(vars);
 	draw_map(vars);
 	victory_print(vars);
@@ -89,6 +87,15 @@ int	key_press(int keycode, t_vars *vars)
 		ft_cleanup(vars);
 		exit(0);
 	}
-	handle_kill(keycode, vars);
-	return (move_player(keycode, vars));
+	if (keycode == 101)
+		handle_kill(vars);
+	else if (keycode == 119)
+		move_player(vars, 0, -1);
+	else if (keycode == 115)
+		move_player(vars, 0, 1);
+	else if (keycode == 97)
+		move_player(vars, -1, 0);
+	else if (keycode == 100)
+		move_player(vars, 1, 0);
+	return (0);
 }

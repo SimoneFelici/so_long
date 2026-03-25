@@ -45,3 +45,15 @@ void	draw_player(t_vars *vars, int x, int y)
 	mlx_put_image_to_window(vars->mlx, vars->win,
 		vars->textures.player_img, x * GRID_SIZE, y * GRID_SIZE);
 }
+
+void	draw_enemy(t_vars *vars, int x, int y)
+{
+	mlx_put_image_to_window(vars->mlx, vars->win,
+		vars->textures.enemy_img, x * GRID_SIZE, y * GRID_SIZE);
+}
+
+void draw_flint(t_vars *vars, int x, int y)
+{
+	mlx_put_image_to_window(vars->mlx, vars->win,
+		vars->textures.flint_img, x * GRID_SIZE, y * GRID_SIZE);
+}

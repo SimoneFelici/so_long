@@ -1,11 +1,5 @@
 #include "so_long.h"
 
-void	draw_enemy(t_vars *vars, int x, int y)
-{
-	mlx_put_image_to_window(vars->mlx, vars->win,
-		vars->textures.enemy_img, x * GRID_SIZE, y * GRID_SIZE);
-}
-
 void	game_over(t_vars *vars)
 {
 	kill_enemy(vars, vars->map_info.player_x, vars->map_info.player_y);
@@ -47,20 +41,17 @@ void	show_flint(t_vars *vars)
 
 	px = vars->map_info.player_x;
 	py = vars->map_info.player_y;
-	mlx_put_image_to_window(vars->mlx, vars->win,
-		vars->textures.flint_img, (px + 1) * GRID_SIZE, py * GRID_SIZE);
+	draw_flint(vars, (px + 1), py);
 	mlx_do_sync(vars->mlx);
 	usleep(150000);
 	draw_map(vars);
 }
 
-void	handle_kill(int keycode, t_vars *vars)
+void	handle_kill(t_vars *vars)
 {
 	int	px;
 	int	py;
 
-	if (keycode != 101)
-		return ;
 	show_flint(vars);
 	px = vars->map_info.player_x;
 	py = vars->map_info.player_y;
